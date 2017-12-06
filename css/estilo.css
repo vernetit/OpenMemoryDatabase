@@ -33,7 +33,7 @@ input[type=checkbox]:checked {
 
 .lupa {
    /*padding:5px 5px 5px 30px; */
-   background:url(/img/lupa.jpg) no-repeat 5px center;
+   background:url(../img/lupa.jpg) no-repeat 5px center;
    width: 30px;
    border-color: gray;
    border-width: 1px;
@@ -41,7 +41,7 @@ input[type=checkbox]:checked {
 }
 .next {
    /*padding:5px 5px 5px 30px; */
-   background:url(/img/play.png) no-repeat 5px center;
+   background:url(../img/play.png) no-repeat 5px center;
    width: 30px;
    border-color: gray;
    border-width: 1px;
@@ -50,13 +50,13 @@ input[type=checkbox]:checked {
 
 .loop {
     -webkit-filter: opacity(50%); filter: opacity(50%);
-    background:url(/img/loop.png);
+    background:url(../img/loop.png);
     
 }
 
 .loop:checked {
     -webkit-filter: opacity(100%); filter: opacity(100%);
-    background:url(/img/loop.png);
+    background:url(../img/loop.png);
 }
 
 .disable-button:disabled{
