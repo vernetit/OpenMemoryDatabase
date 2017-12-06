@@ -225,9 +225,7 @@
             save += "|";
           }
           save = save.substring(0, save.length - 1);
-          $.cookie('initBin', save, {
-            expires: 300
-          });
+          localStorage.setItem("initBin", save);
           console.log(save);
           return _this.iniciarBin();
         };
@@ -321,9 +319,7 @@
           save = save.substring(0, save.length - 1);
           _this.todasConfiguracionesMR = [];
           _this.matrizMRConfiguracion = [];
-          $.cookie('initMR', save, {
-            expires: 300
-          });
+          localStorage.setItem("initMR", save);
           $("#tiempoMR").val("500");
           $("#digitosMR").val("6");
           _this.selectedMRAccion = 0;
@@ -336,7 +332,7 @@
             return;
           }
           if (confirm('Estás seguro que quieres borrar las configuraciones?')) {
-            $.removeCookie("initMR");
+            localStorage.removeItem('initMR');
             _this.todasConfiguracionesMR = [];
             _this.matrizMRConfiguracion = [];
             $("#tiempoMR").val("500");
@@ -364,6 +360,39 @@
               save = save.substring(0, save.length - 1);
               save += "|";
             }
+            swal({
+              title: 'Rapid Memory',
+              imageUrl: '',
+              text: 'Enter Name',
+              type: 'input',
+              showCancelButton: false,
+              closeOnConfirm: true,
+              animation: 'slide-from-top',
+              inputValue: '',
+              inputPlaceholder: ''
+            }, function(inputValue) {
+              var name, nombre, o, ref2;
+              name = inputValue;
+              nombre = name;
+              if (nombre === "") {
+                return;
+              }
+              save += nombre + "*" + $("#tipoMR").val() + "*" + $("#tiempoMR").val() + "*" + $("#digitosMR").val() + "*";
+              for (i = o = 0, ref2 = $("#digitosMR").val() - 1; 0 <= ref2 ? o <= ref2 : o >= ref2; i = 0 <= ref2 ? ++o : --o) {
+                save += (parseInt(_this.matrizMRConfiguracion[i][0])) + " " + (parseInt(_this.matrizMRConfiguracion[i][1])) + " " + _this.matrizMRConfiguracion[i][2];
+                save += "-";
+              }
+              save = save.substring(0, save.length - 1);
+              seleccionado = _this.todasConfiguracionesMR.length;
+              localStorage.setItem("initMR", save);
+              _this.selectedMRAccion = seleccionado;
+              _this.todasConfiguracionesMR = [];
+              _this.matrizMRConfiguracion = [];
+              _this.cargarMR();
+              _this.abrirMR();
+              return _this.configurarMR();
+            });
+            return;
             nombre = prompt("Enter name", "");
             if (name = "") {
               return;
@@ -398,10 +427,16 @@
               save += "|";
             }
             save = save.substring(0, save.length - 1);
+            localStorage.setItem("initMR", save);
+            _this.selectedMRAccion = seleccionado;
+            _this.todasConfiguracionesMR = [];
+            _this.matrizMRConfiguracion = [];
+            _this.cargarMR();
+            _this.abrirMR();
+            _this.configurarMR();
           }
-          $.cookie('initMR', save, {
-            expires: 300
-          });
+          return;
+          localStorage.setItem("initMR", save);
           _this.selectedMRAccion = seleccionado;
           _this.todasConfiguracionesMR = [];
           _this.matrizMRConfiguracion = [];
@@ -792,12 +827,10 @@
 
     motorReaction.prototype.iniciarBin = function() {
       var arrayBase, arrayBase1, i, j, k, m, myCookie, ref, results, save, str, txt;
-      myCookie = $.cookie('initBin');
+      myCookie = localStorage.getItem("initBin");
       if (!(myCookie != null)) {
         save = "r|t d|f|n|c k|l|s z|m";
-        $.cookie('initBin', save, {
-          expires: 300
-        });
+        localStorage.setItem("initBin", save);
         this.iniciarBin();
         return;
       }
@@ -1565,7 +1598,7 @@
       var i, m, myCookie, ref, save, seleccionado;
       this.configurarMR();
       if (userId === 0) {
-        myCookie = $.cookie('initMR');
+        myCookie = localStorage.getItem("initMR");
         if (!(myCookie != null)) {
           save = "Nuevo*" + $("#tipoMR").val() + "*" + $("#tiempoMR").val() + "*" + $("#digitosMR").val() + "*";
           for (i = m = 0, ref = this.matrizMRConfiguracion.length - 1; 0 <= ref ? m <= ref : m >= ref; i = 0 <= ref ? ++m : --m) {
@@ -1575,9 +1608,7 @@
             }
           }
           seleccionado = this.todasConfiguracionesMR.length;
-          $.cookie('initMR', save, {
-            expires: 300
-          });
+          localStorage.setItem("initMR", save);
         }
         this.cargarMR();
         return $("#configuraciones-mr").val(myCookie);
@@ -1598,7 +1629,7 @@
     motorReaction.prototype.cargarMR = function() {
       var arrayBase, arrayBase1, arrayBase2, arrayBase3, auxBase, auxBase1, auxBase2, i, j, k, m, myCookie, n, o, p, poner, q, ref, ref1, ref2, ref3, ref4, results, select;
       if (userId === 0) {
-        myCookie = $.cookie('initMR');
+        myCookie = localStorage.getItem("initMR");
       } else {
         myCookie = cargaConfiguracionesMr;
       }

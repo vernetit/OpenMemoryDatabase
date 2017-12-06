@@ -70,6 +70,8 @@ class motorReaction
 	killAS1 : 0
 	
 	constructor : () ->
+
+
 		$("#randomActive").click =>
 			if $("#randomActive").is(':checked')
 				$("#autoshow").prop('checked', false);
@@ -207,7 +209,9 @@ class motorReaction
 				save += "|"
 			
 			save = save.substring(0, save.length-1)
-			$.cookie('initBin', save, { expires: 300 })
+			#localStorage.setItem("configAppLocalStorageFC", configApp);
+			#$.cookie('initBin', save, { expires: 300 })
+			localStorage.setItem("initBin", save);
 			console.log save
 
 			@iniciarBin()
@@ -312,7 +316,8 @@ class motorReaction
 
 			@todasConfiguracionesMR = []
 			@matrizMRConfiguracion = []
-			$.cookie('initMR', save, { expires: 300 })
+			#$.cookie('initMR', save, { expires: 300 })
+			localStorage.setItem("initMR", save)
 
 			$("#tiempoMR").val("500")
 			$("#digitosMR").val("6")
@@ -328,7 +333,9 @@ class motorReaction
 
 			if confirm('Estás seguro que quieres borrar las configuraciones?')
 
-				$.removeCookie("initMR")
+				#$.removeCookie("initMR")
+				localStorage.removeItem('initMR')
+
 				@todasConfiguracionesMR = []
 				@matrizMRConfiguracion = []
 
@@ -369,6 +376,60 @@ class motorReaction
 
 				#txt = possible.charAt( _.random(0,possible.length-1) ) + possible1.charAt( _.random(0,possible1.length-1) ) + possible.charAt( _.random(0,possible.length-1) ) 
 				#nombre = txt
+				
+				swal {
+				  title: 'Rapid Memory'
+				  imageUrl: ''
+				  text: 'Enter Name'
+				  type: 'input'
+				  showCancelButton: false
+				  closeOnConfirm: true
+				  animation: 'slide-from-top'
+				  inputValue: ''
+				  inputPlaceholder: ''
+				}, (inputValue) =>
+
+					name = inputValue
+					nombre = name
+
+					if nombre == ""
+						return
+
+					save += nombre + "*" + $("#tipoMR").val() + "*" + $("#tiempoMR").val() + "*" + $("#digitosMR").val() + "*"
+
+					for i in [0..$("#digitosMR").val()-1]
+						
+						save += """#{parseInt(@matrizMRConfiguracion[i][0])} #{parseInt(@matrizMRConfiguracion[i][1])} #{@matrizMRConfiguracion[i][2]}"""
+						save += "-"
+
+					save = save.substring(0, save.length-1);
+
+					seleccionado = @todasConfiguracionesMR.length
+
+					localStorage.setItem("initMR", save);
+
+					@selectedMRAccion = seleccionado
+
+					@todasConfiguracionesMR = []
+					@matrizMRConfiguracion = []
+
+					@cargarMR() #carga todas las configuraciones desde el cookie
+					@abrirMR() #abre la configuración
+					@configurarMR() #dibuja la configuracion abierta
+
+
+				  #alert(inputValue);
+				  #level = parseInt(inputValue)
+				  #console.log 'level: ' + level
+				  #alert(level);
+				  #initGameMatrix()
+				  #initSnake()
+				  #gameMatrix[0][0][0]=1;
+				  #dibujaMatrix();
+				  #return
+
+				return
+
 				nombre = prompt("Enter name", "");
 				if name=""
 					return
@@ -418,10 +479,24 @@ class motorReaction
 					save += "|"
 
 				save = save.substring(0, save.length-1);
+
+				localStorage.setItem("initMR", save);
+
+				@selectedMRAccion = seleccionado
+
+				@todasConfiguracionesMR = []
+				@matrizMRConfiguracion = []
+
+				@cargarMR() #carga todas las configuraciones desde el cookie
+				@abrirMR() #abre la configuración
+				@configurarMR() #dibuja la configuracion abierta
 				
 
-			$.cookie('initMR', save, { expires: 300 });
-			
+
+			return
+			#$.cookie('initMR', save, { expires: 300 });
+			localStorage.setItem("initMR", save);
+
 			@selectedMRAccion = seleccionado
 
 			@todasConfiguracionesMR = []
@@ -838,13 +913,17 @@ class motorReaction
 		document.body.style.zoom = @myZoom
 
 	iniciarBin : () ->
-		myCookie = $.cookie('initBin')
+		#myCookie = $.cookie('initBin')
+
+		myCookie = localStorage.getItem("initBin")
 		#console.log myCookie
 
 		if not (myCookie?) #si no hay cokie
 
 			save = "r|t d|f|n|c k|l|s z|m"
-			$.cookie('initBin', save, { expires: 300 })
+			#$.cookie('initBin', save, { expires: 300 })
+			localStorage.setItem("initBin", save);
+
 			@iniciarBin()
 
 			return
@@ -1960,7 +2039,8 @@ class motorReaction
 		
 		if userId == 0
 			
-			myCookie = $.cookie('initMR')
+			#myCookie = $.cookie('initMR')
+			myCookie = localStorage.getItem("initMR")
 
 			if not (myCookie?) #si no hay cokie
 
@@ -1975,7 +2055,8 @@ class motorReaction
 
 				seleccionado = @todasConfiguracionesMR.length
 
-				$.cookie('initMR', save, { expires: 300 });
+				#$.cookie('initMR', save, { expires: 300 });
+				localStorage.setItem("initMR", save)
 	
 			
 			@cargarMR()
@@ -1995,9 +2076,11 @@ class motorReaction
 				return
 
 	cargarMR : () ->	
+
 		
 		if userId == 0
-			myCookie = $.cookie('initMR')
+			#myCookie = $.cookie('initMR')
+			myCookie = localStorage.getItem("initMR")
 		else
 			myCookie = cargaConfiguracionesMr
 	
