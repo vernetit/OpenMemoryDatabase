@@ -1,0 +1,598 @@
+<!-- Desarrollado por Vernetit -->
+<html lang="es"> 
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+  
+  <title>MemoryDb</title>
+
+  <!--<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>-->
+  
+
+    <script src="js/jquery.min.js" type="text/javascript"></script> 
+
+    <script src="js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/sweetalert.css" />
+  
+  
+   <!-- <script src="js/Chart.js"></script> -->
+    <link rel="shortcut icon" href="./favicon.ico">
+
+    <meta name="description" content="Competición mental: estadísticas, ranking, entrenamiento">
+    <meta name="keywords" content="entrenamiento mental, atletismo mental, entrenar tu mente">
+
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" id="theme" type="text/css" />
+
+<script type="text/javascript">
+    var theme = location.href.split(/\?/)[1];
+    theme = theme || 'metro';
+    $("#theme").attr('href', "themes/"+ theme +"/css/jquery.msgbox.css");
+    
+    $ (document) .ready(function(){
+        var produce = function () {
+            $("pre.code").each (function(){
+                eval ($(this).text());
+            });
+        }
+        
+        $("#themeswitcher").val(theme);
+        
+        produce();
+        
+        $("#themeswitcher").change(function(){
+            location.href = location.href.split(/\?/)[0] + '?' + $(this).val();
+        });
+    });
+</script>
+<script type="text/javascript">
+  
+    var userId = 0;
+  var userName = "guest";
+
+  
+  var cargaConfiguracionesMr = "";
+
+  var isMovilSystem = 0;
+
+  var helpText = "contact: robertchalean@gmail.com";
+
+
+</script>
+</head>
+<body>
+  <a name="top">
+  <div id="navegar" style="font-size: 90%;">
+        <div id="controlesMR">
+              <!-- href="/home"  -->
+             <!-- <span id="myRand"></span> -->
+              <!-- <a href="#" style="text-decoration:none;"><b>MR</b></a> &nbsp; -->
+              <a href="#" onclick="location.reload();">MemoryDb</a>
+              <span id="menu-modules"></span>&nbsp;
+              <span id="abrirMRDiv"> 
+                <select id="abrirMR1" style="width: 65px">
+                  <option value="0"  selected>Nuevo</option>
+                </select>
+            </span>
+            &nbsp;
+            <span id="tiempoGo"></span>ms
+            &nbsp;
+
+            <span id="fast-mode-txt">Fast Mode</span> <input type="checkbox" id="fastMode">&nbsp;
+            <input type="button" name="go" value="GO!" id="goMR">
+            <input type="button" name="check" value="check" id="checkMR" class="disable-button"> 
+            <span id="controlesMR1">
+                <input type="button" name="next"  id="nextMR" class="next"> 
+                <input type="button" name="verify" id="verifyMR" class="lupa"> 
+            </span>
+            
+            <input type="button" value="config" id="boton-conf"> 
+            <!-- <input type="button" value="more" id="boton-more"> -->
+
+            <!--<div style="visibility: hidden;"> -->
+            
+            <span id="more-div">
+
+            <input type="checkbox" id="autoplay" class="loop img-checkbox" title="Autoplay">&nbsp;<input type="text" style="width: 35px;" value="1000" id="tiempoAutoplay">ms
+
+            <span id="myLimitSpan">
+            &nbsp;Limit&nbsp;
+            <input type="checkbox" id="limitautoplay" checked>  
+            &nbsp;
+            <span id="pasadasTxt">0</span>/<input type="text" style="width: 30px;" value="30" id="cantidadLimitAutoplay">&nbsp;</span>
+
+            <span id="myRandom">
+                <div class="dropdown">
+                <a href="#" class="dropbtn" style="text-decoration: none; color:black;"><img src="img/random.png" width="16px" height="16px"></a>
+                <div class="dropdown-content" style="width: 200px !important;">
+                <div id="">Active<input type="checkbox" id="randomActive"></div>  <br>
+                <div id=""><a href="#" id="randomAll">All</a>/<a href="#" id="randomNone">none</a>/<a href="#" id="randomRandom">random</a> </div>  <br>
+                <div id="">
+                  <div style="width: 63px !important; float: left;"><input type="button" value="Set All" id="setAllRandom"></div><input type="text" style="width: 40px;" value="26000" id="allRandomText">ms<input type="text" style="width: 20px;" value="20" id="allRandomText1">s<input type="text" style="width: 20px;" value="5" id="allRandomText2">s<br>
+                </div>  <br>
+                <div style="width: 63px !important;"><input type="button" value="Reset All" id="resetAllRandom"></div><br>
+                <div id="lista"></div>
+                  
+                </div>
+              </div>
+                &nbsp;
+            </span>
+
+            <span id="myAutoShowSpan">
+                <div class="dropdown">
+                <a href="#" class="dropbtn" style="text-decoration: none; color:black;"><img src="img/results.png" width="16px" height="16px"></a>
+                <div class="dropdown-content" style="width: 200px !important;">
+                  Active<input type="checkbox" id="autoshow" >&nbsp; ch1<input type="text" style="width: 20px;" value="3" id="tiempoAutoshow">s&nbsp; ch2<input type="text" style="width: 20px;" value="3" id="tiempoAutoshow1">s
+                </div>
+              </div>
+                &nbsp;
+            </span>
+
+            <span ondblclick="$(this).hide();" id="myContadorSpan"><span id="contadorMR"></span></span>
+
+
+            <span style="display:none">
+              <span id="ranking" title="ranking"><a href="#"><img src="img/trofeo.png" width="16px" height="16px"></a></span>&nbsp;
+              <span id="myCharts" title="Stats"><a href="#"><img src="img/3d_bar_chart.png" width="16px" height="16px"></a></span>&nbsp;
+              <span id="online-span" title="Duels"><a href="#"><img src="img/game1.png" width="16px" height="16px"></a></span>&nbsp;
+            </span>
+         
+
+            <span id="zoom-span" >
+              <select id="zoomMR" style="width: 55px;">
+                    <option value="25">25%</option>
+                    <option value="50">50%</option>
+                    <option value="75" selected>75%</option>
+                    <option value="100">100%</option>
+                    <option value="150">150%</option>
+                    <option value="175">175%</option>
+                    <option value="200">200%</option>
+                    <option value="225">225%</option>
+
+                                  <!--<option value="5" onclick="alert('En construcción.');">palabras</option>-->
+
+              </select> 
+            
+
+            </span>&nbsp;
+
+            <span id="control-usuarios" style="display:none;"></span>
+
+            &nbsp;<a href="#" onclick="alert(window.helpText); putHelp();"><img src="img/help.png"> </a>
+            <span id="fb-btn" style="display:none;">
+              <div class="fb-share-button" data-href="http://competicionmental.appspot.com/" data-layout="button_count" style="float: right;"></div>
+              
+            </span>
+            </span>
+        </div>  
+  </div>
+  <div style="clear:both;"/></div>
+    <center>
+      <div id="screen">
+      
+      
+
+      </div>
+    </center>
+  <div style="clear:both;"/></div>
+      <div id="div-configurar">
+        <form id="myForm">
+            <table border="0" width="1200px" height="600px">
+                <tr>
+                    <td width="100" style="vertical-align: top;">
+                    <div id="control-configurar-div">
+                    <table>
+                        <tr width="100%">
+                            <td>
+                                <input type="button" value="-" id="restaDigitosMR">
+                                <input type="text" style="width: 30px;" value="6" id="digitosMR">
+                                <input type="button" value="+" id="sumaDigitosMR"> 
+                                <span id="digits-configuration-span">digits</span> 
+                                <select id="tipoMR">
+                                  <option value="0" selected>dec</option>
+                                  <option value="1">bin6</option>
+                                  <option value="3">bin8</option>
+                                  <option value="2">letras</option>
+                                  <!--<option value="5" onclick="alert('En construcción.');">palabras</option>-->
+
+                                </select> 
+                                 <input type="text" style="width: 40px;" value="500" id="tiempoMR"> ms <span id="open-span">
+                                Open </span>
+                                <span id="abrirMRDiv"> 
+                                    <select id="abrirMR">
+                                      <option value="0"  selected>Nuevo</option>
+                                    </select>
+                                </span>
+                                 
+                            </td>
+                            <td>
+                                 <input type="button" value="Save" id="guardarMR"> <!-- <span id="espacioMR">4096</span>B --> <br>
+                                 <input type="button" value="delete" id="borrarMR"> <br> 
+                                 <span id="delete-all-span"><input type="button" value="Delete all" id="borrarTodoMR"><span id="delete-separator-span">|</span></span>
+                            </td>
+                            <td id="select-td">
+                                 <input type="button" value="Unselect All" id="unselectMR"><br>
+                                <input type="text" style="width: 86px;" value="" id="seleccionMR"><br>
+                                <span id="siguiente-span">siguiente: <input type="text" style="width: 28px;" value="" id="siguienteMR"></span>
+                            </td>
+                            <td>
+                              <div id="control-config">
+                               <span id="select-span"></span>
+                                <table>
+                                    <tr>
+                                        <td><input type="button" value="+&nbsp;" id="addMR"></td>
+                                        <td><input type="button" value="▲" id="upMR"></td>
+                                        <td><input type="button" value="-&nbsp;" id="restMR"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="button" value="◀"  id="leftMR"></td>
+                                        <td><input type="text" style="width: 29px; text-align: center;" value="5" id="movimientoMR"></td>
+                                        <td><input type="button" value="▶"  id="rightMR"></td>
+                                    </tr>
+                                    <tr>
+                                    <!-- <span id="currentMR"></span> -->
+                                      <td><input type="button" value="++" id="addMR1"></td>
+                                      <td><input type="button" value="▼"  id="downMR"></td>
+                                      <td><input type="button" value="--" id="restMR1"></td>
+                                    </tr>
+                                </table>
+                                </div>
+                                
+                            </td>
+                            <td>
+                                <div style="zoom: 0.8;" id="bin-controls-td">
+                                    <table>
+                                           <tr>
+                                                <td>
+                                                    000 <input type="text" style="width: 50px" id="binMR0"> <br>
+                                                    001 <input type="text" style="width: 50px" id="binMR1"> <br>
+                                                    010 <input type="text" style="width: 50px" id="binMR2"> <br>
+                                                    011 <input type="text" style="width: 50px" id="binMR3"> <br>
+                                                </td>
+                                                <td>
+                                                    100 <input type="text" style="width: 50px" id="binMR4"> <br>
+                                                    101 <input type="text" style="width: 50px" id="binMR5"> <br>
+                                                    110 <input type="text" style="width: 50px" id="binMR6"> <br>
+                                                    111 <input type="text" style="width: 50px" id="binMR7"> <br>
+                                                </td>
+                                           </tr>     
+                                    </table>    
+                                </div>
+                            </td>
+                            <td id="guardar-bin-td">
+                                 <input type="button" value="Save" id="guardarMRBin">
+                            </td>
+                            <td valign="top" style="zoom: 0.9;" id="tamano-texto-td">
+                                <div>
+                                fonts: <br>
+                                 <select id="tipoLetra">
+                                    <option value="0" selected>Arial</option>
+                                    <option value="1">Arial Black</option>
+                                    <option value="2">Comic Sans MS</option>
+                                    <option value="3">Impact</option>
+                                  </select>
+                                  <br>
+                                  <input type="number" value="30" name="num" min="0" max="50">
+                                  <br>
+                                  <input type="color" name="color" style="width: 32px;">
+
+                                   <!-- <div style="font-family: Georgia, serif;">hola</div>
+                                    <div style="font-family: 'Times New Roman', Times, serif;">hola</div>
+                                  </div> -->
+                            </td>
+                        </tr>        
+                    </table>
+                    </div>
+                    <br>
+                    <div class="wrapper" div="numeros-configuracion-div">
+                        <div class="container">
+                            <div class="element">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    </td>
+                </tr> 
+            </table>
+           <!-- <input type="button" value="OK" id="boton-guardar"> <input type="reset" value="reset"> -->
+        </form>
+        
+    </div>
+    </center>
+    </div>
+     <ul id="messages" style="height: 50px;"></ul>
+    
+
+
+    <div id="testLetter" style="display: inline-block; display: hidden; font-size: 40px; display: none;" >9</div>
+    <div id="footer">
+        <input type="button" name="btn-z-nm" value="Go!" style="width: 50%; height: 100px; float: left;"id="btn-z-id">
+        <input type="button" name="btn-x-nm" value="Check" style="width: 50%; height: 100px; float: right;" id="btn-x-id" align="left">
+    </div>
+    
+    <form action="/" id="configuracionesform">
+      <input type="hidden" name="configuraciones_mr" value="" id="configuraciones-mr">
+      <input type="hidden" name="accion_mr" value="" id="accion-mr">
+    </form>
+    <script type="text/javascript">
+
+mensaje = "";
+bOk = 1;
+buttonDisable = 0;
+nombre = "";
+
+$("#loading-span").hide();
+
+$("#registrar-btn").click(function(){
+
+  $('#abrirMR1').prop('disabled', true);
+
+  $("#loading-span").show();
+  if(buttonDisable)
+    return;
+
+  buttonDisable = 1;
+
+  $("#mensaje-registro").html("");
+  mensaje="";
+  
+  nombre = $("#nombre-usuario").val();
+  apellido = $("#apellido-usuario").val();
+  email = $("#email-usuario").val();
+  password = $("#password-usuario").val();
+  passwordRepetir = $("#password-repetir-usuario").val();
+  
+  if(nombre.length < 2){
+    bOk = 0;
+    mensaje += "Debe completar un nombre de usuario <br>"
+  }
+  if(apellido.length < 2){
+    bOk = 0;
+    mensaje += "Debe completar un nombre de usuario <br>"
+  }
+  if(!validarEmail(email)){
+    bOk = 0;
+    mensaje += "Email incorrecto <br>"
+  }
+  if(password.length < 6){
+    bOk = 0;
+    mensaje += "El passoword debe tener por lo menos 6 caracteres <br>"
+  }
+  if(password != passwordRepetir){
+    bOk = 0;  
+    mensaje += "Los password no coinciden<br>"
+  }
+  if(bOk){
+
+    $.post( "/ajaxRegistrar", $( "#testform" ).serialize())
+      .done(function( data ) {
+        if(parseInt(data)==0){
+          mensaje += "El mail ya esta registrado";
+          $("#mensaje-registro").html(mensaje);
+          buttonDisable = 0;
+          $("#loading-span").hide();
+          $('#abrirMR1').prop('disabled', false);
+        }else{
+          userId = data;
+          userName = nombre;
+
+          $("#ok-registro").html("<br>Usuario registrado: " + data);
+          //$("#formulario-registro").html("");
+          $("#loading-span").hide();
+          $("#logInOrSignUp").hide();
+
+          ponerLogout(nombre);
+          
+          $.post('/configuracionesMr', $('#configuracionesform').serialize()).done (function(data){
+            //alert(data);
+            window.juegoReaction.iniciarMR();
+
+          });
+          buttonDisable = 0;
+          
+        }
+          
+      });
+    
+  }else{
+    $('#abrirMR1').prop('disabled', false);
+    $("#mensaje-registro").html(mensaje);
+    buttonDisable = 0;
+    $("#loading-span").hide();
+  }
+});
+
+bOkLogin = 1;
+mensajeLogin = "";
+buttonDisableLogin = 0;
+$("#loading-login-span").hide();
+
+$("#login-btn").click(function(){
+  $('#abrirMR1').prop('disabled', true);
+  //console.log("login-btn");
+
+  if(buttonDisableLogin)
+    return;
+
+  $("#loading-login-span").show();
+
+  buttonDisableLogin = 1;
+
+  $("#mensaje-login").html("");
+  mensajeLogin="";
+  
+  
+  email = $("#email-login").val();
+  password = $("#password-login").val();
+
+
+  if(!validarEmail(email)){
+    bOkLogin = 0;
+    mensajeLogin += "Email incorrecto <br>"
+  }
+  if(password.length < 6){
+    bOkLogin = 0;
+    mensajeLogin += "El passoword debe tener por lo menos 6 caracteres <br>"
+  }
+  if(bOkLogin){
+
+
+    $.post( "/ajaxLogin", $( "#loginform" ).serialize())
+      .done(function( data ) {
+      
+        if(parseInt(data)!=0){
+          texto = data.split("|");
+
+          ponerLogout(texto[1]);
+              
+          $("#loading-login-span").hide();
+          $("#logInOrSignUp").hide();
+
+          userId = parseInt(texto[0]);
+          userName = texto[1];
+
+          window.juegoReaction.iniciarMR();
+
+          
+          buttonDisableLogin = 0;
+
+                    
+        }else{
+          mensajeLogin += "Usuario o contraseña incorrectos";
+          $("#mensaje-login").html(mensajeLogin);
+          buttonDisableLogin = 0;
+          $("#loading-login-span").hide();
+          $('#abrirMR1').prop('disabled', false);
+        }
+          
+      });
+    
+  }else{
+    $("#loading-login-span").hide();
+    $("#mensaje-login").html(mensajeLogin);
+    $('#abrirMR1').prop('disabled', false);
+    buttonDisableLogin = 0;
+    
+  }
+});
+
+function ponerLogout(myName){
+  controlTxt = '<div class="dropdown">' +
+          
+    '<span><a href="#" id="logout">' + myName + '</a></span>' +
+    '<div class="dropdown-content">' +
+    '<a href="#" id="logout-link">Log out</a>' + 
+  '</div>' ;
+          
+  $("#control-usuarios").html(controlTxt);
+
+  $("#logout-link").click(function(){
+
+    $.post( "/logout", {})
+      .done(function( data ) {
+      userId = 0;
+      userName = "guest";
+      
+      ponerControlUsuarios();
+      
+      window.juegoReaction.iniciarMR();
+      });
+
+  });
+}
+
+function ponerControlUsuarios(){
+
+  if(isMovilSystem){
+
+    $("#control-usuarios").html("&nbsp;<a href=\"#\" onclick=\"\" id=\"manage-acounts-btn\"><img src=\"img/user.png\"></a>");
+  }else{
+    $("#control-usuarios").html("<a href=\"#\" onclick=\"\" id=\"manage-acounts-btn\">Log In or sign up</a>");
+
+  }
+  
+
+      $("#manage-acounts-btn").click(function(){
+        if(verSignInOrSignOut){
+          $('#logInOrSignUp').show();
+
+          verSignInOrSignOut = 0;
+        }else{
+
+          $('#logInOrSignUp').hide();
+          verSignInOrSignOut = 1;
+        }
+
+      });
+
+
+}
+
+function validarEmail( email ) {
+    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if ( !expr.test(email) )
+       return 0;
+   return 1;
+}
+
+verSignInOrSignOut = 1;
+/*
+setInterval(function(){
+  $.post('/duelosMr', {}).done (function(data){
+            //alert(data);
+            $("#myRand").html(data);
+
+          });
+
+
+},500);*/
+
+</script>
+    
+    <style>
+   ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      ul li {
+        line-height: 1.4;
+      }
+</style>
+<span style="display:none;">
+ <h1>Pings 1</h1>
+ <ul id='pings'></ul>
+</span>
+  
+  <script src="js/jquery.msgbox-dist.js" type="text/javascript"></script>
+  <script src="js/jquery.cookie-dist.js" type="text/javascript"></script> 
+  <script src="js/underscore-min.js" type="text/javascript"></script> 
+
+  <script src="js/em2.js" type="text/javascript"></script> 
+  <script src="js/controller.js" type="text/javascript"></script> 
+
+  <script type="text/javascript">
+
+  $(".tengo-cuenta").hide();
+  function putHelp(){
+    myScreen=
+    `
+    <h3>Guia en video</h3>
+    <iframe width="320" height="180" src="https://www.youtube.com/embed/yV4rr07ARko?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+    `;
+
+    //$("#screen").html(myScreen);
+
+
+  }
+  putHelp();
+
+  function n(x){ return parseInt($("#"+x).val()); }
+  </script>
+</body>
+</html>
+
+
+
