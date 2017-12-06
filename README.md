@@ -1,6 +1,8 @@
 # OpenMemoryDatabase
 
-Train your memory with your own databases and images
+Train your memory with your own Databases and Images
+
+Video: 
 
 USE
 
@@ -15,4 +17,19 @@ $ npm install && npm start
 
 THEN
 
-put all the files and folders in the / folder
+Add all the repository files in the root folder
+Add multiple folders with your own images and databases:
+
+Folders of faces and names,images and words
+
+/faces/female/my_folder_name/ (folder with jpg or png files)
+/faces/male/my_folder_name/ (folder with jpg or png files)
+/names/female/my_list.txt (add to this folder multiple files in txt format)
+/names/male/my_list.txt (add to this folder multiple files in txt format)
+/surnames/my_list.txt (add to this folder multiple files in txt format)
+/images/any folder name/ (folder with jpg or png files)
+/words/my archive.txt (add to this folder multiple files in txt format)
+
+Contact: robertchalean@gmail.com
+
+Thanks!
