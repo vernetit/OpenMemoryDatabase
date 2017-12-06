@@ -1,0 +1,274 @@
+.img-checkbox, .img-checkbox:checked {}
+/*
+.jMsgbox-controls a {
+
+    width: 30px !important;
+    height: 30px !important;
+}
+*/
+input[type=checkbox].img-checkbox , input[type=checkbox]:checked.img-checkbox:checked {
+    /*display: block; */
+   /* width: 16px;
+    height: 16px;*/
+     background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    -webkit-appearance: none;
+    outline: 0;
+     vertical-align: middle;
+
+}
+/*
+input[type=checkbox]:checked {
+    /*display: block;
+    width: 30px;
+    height: 30px;*//*
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    -webkit-appearance: none;
+    outline: 0;
+}*/
+
+
+.lupa {
+   /*padding:5px 5px 5px 30px; */
+   background:url(/img/lupa.jpg) no-repeat 5px center;
+   width: 30px;
+   border-color: gray;
+   border-width: 1px;
+   /*border: none;*/
+}
+.next {
+   /*padding:5px 5px 5px 30px; */
+   background:url(/img/play.png) no-repeat 5px center;
+   width: 30px;
+   border-color: gray;
+   border-width: 1px;
+   /*border: none;*/
+}
+
+.loop {
+    -webkit-filter: opacity(50%); filter: opacity(50%);
+    background:url(/img/loop.png);
+    
+}
+
+.loop:checked {
+    -webkit-filter: opacity(100%); filter: opacity(100%);
+    background:url(/img/loop.png);
+}
+
+.disable-button:disabled{
+    color: black;
+    
+
+
+}
+
+.emo-img
+{
+    width: 70px;
+    height: 90px;
+}
+
+.emoji-img
+{
+    width: 32px;
+    height: 32px;
+}
+
+
+.meme-img
+{
+    width: 64px;
+    height: 64px;
+}
+
+.modal
+{
+    overflow: hidden;
+}
+.modal-dialog{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+
+.wrapper {
+    /* width:100% */
+}
+.container {
+
+    margin:0 auto;
+    height:500px;
+     /* 
+       width:300px;
+     background:#ccc; */
+}
+.element {
+   /* background:#f2f2f2; */
+    position: fixed; 
+
+    margin-left: 0px;
+  
+  
+   /* 
+    position:fixed;
+      width:10px;
+    height:10px;
+    */
+
+    /*
+    
+
+    
+     border:0px solid #d6d6d6; */
+}
+
+ #footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+ #output1 div {
+    float: left;
+    height: 20px;
+    width: 14px;
+    margin-bottom: 10px;
+    margin: 10px 0 10px 0;
+
+    }
+
+
+	.up {
+    width: 0px;
+    height: 0px;
+    border-style: inset;
+    border-width: 0 100px 173.2px 100px;
+    border-color: transparent transparent #007bff transparent;
+    
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -webkit-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+    }
+
+    .up p {
+        text-align: center;
+        top: 80px;
+        left: -47px;
+        position: relative;
+        width: 93px;
+        height: 93px;
+        margin: 0px;
+        font-size: 20px;
+    }
+
+    .circle
+        {
+        width:250px;
+        height:250px;
+        border-radius:125px;
+        font-size:20px;
+        color:#fff;
+        line-height:250px;
+        text-align:center;
+        background:#000
+        }
+
+    input[type=checkbox]
+    {
+      /* Double-sized Checkboxes */
+      -ms-transform: scale(0.75); /* IE */
+      -moz-transform: scale(0.75); /* FF */
+      -webkit-transform: scale(0.75); /* Safari and Chrome */
+      -o-transform: scale(0.75); /* Opera */
+      padding: 10px;
+    }
+
+    .lm{
+        color: #000000; text-decoration: underline;
+
+    }
+
+    /*o.v.*/
+
+    .image-dropdown {
+        /*style the "box" in its minimzed state*/
+        border:1px solid black; width:240px; height:50px; overflow:hidden;
+        /*animate collapsing the dropdown from open to closed state (v. fast)*/
+        -moz-transition: height 0.1s; 
+        -webkit-transition: height 0.1s; 
+        -ms-transition: height 0.1s;  
+        -o-transition: height 0.1s;  
+        transition: height 0.1s;
+    }
+    .image-dropdown:hover {
+        /*when expanded, the dropdown will get native means of scrolling*/
+        height:250px; overflow-y:scroll;
+        /*nice and smooth expand - speed this up at your preference or remove animation altogether*/
+        -moz-transition: height 0.5s; 
+        -webkit-transition: height 0.5s; 
+        -ms-transition: height 0.5s;  
+        -o-transition: height 0.5s;  
+        transition: height 0.5s;
+    }
+.header-home{
+
+  background-color: black;
+  width: 100%;
+  height: 20px;
+  margin: 0px 0px 0px 0px;
+
+}
+.title-home{
+  margin-left: 10px;
+  font-weight: bold;
+  color: white;
+  float: left;
+}
+.control-home{
+  margin-right: 20px;
+  float: right;
+  color: white;
+}
+a.user-text {
+  text-decoration: none;
+  color: white;
+}
+.tengo-cuenta{
+  font-size: 12px;
+}
+
+#mensaje-registro, #mensaje-login{
+  color: red;
+  font-size: 14px;
+}
+#ok-registro{
+  color: green;
+  font-size: 14px;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+   
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+   
