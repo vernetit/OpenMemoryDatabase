@@ -2,7 +2,7 @@
 
 Train your memory with your own Databases and Images
 
-Video: 
+Video of the App: https://www.youtube.com/watch?v=EkgtvhQC088 
 
 USE
 
