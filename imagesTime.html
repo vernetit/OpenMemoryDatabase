@@ -17,19 +17,42 @@
     </style>
   </head>
   <body>
+    
     <!--<h1>Hello World!</h1>-->
     <a href="#" onclick="location.reload();">MemoryDb</a>
     <span id="menu-modules"></span>
 
     <span id="mySelect"></span>
     <input type="button" value="start" onclick="startGame();" style="/*font-size: 30px;*/">
-    <select id="cantidadImg">
+    <select id="cantidadImg" style="display:none;">
       <option value="30" selected>30</option>
       <option value="60">60</option>
       <option value="90">90</option>
     </select>
-    <input type="button" value="recall" onclick="recall();" id="recall-btn" style="font-size: 30px;">
-    <input type="button" value="answer" onclick="answer();" id="answer-btn" style="font-size: 30px;">
+    <select id="timer" style="">
+      <!-- <option value="0.1" selected>0.1m</option> -->
+      <option value="1">1m</option>
+      <option value="5" selected>5m</option>
+      <option value="10">10m</option>
+      <option value="15">15m</option>
+      <option value="20">20m</option>
+      <option value="25">25m</option>
+      <option value="30">30m</option>
+      <option value="45">45m</option>
+      <option value="60">60m</option>
+      <option value="75">1h15m</option>
+      <option value="90">1h30m</option>
+    </select>
+    row
+    <select id="myRow" style="">
+      <!-- <option value="0.1" selected>0.1m</option> -->
+      <option value="5" selected>5 img</option>
+      <option value="10">10 img</option>
+    </select>
+    <script type="text/javascript">bHideNumber=1;</script>
+    hide number <input type="checkbox" onclick="bHideNumber=!bHideNumber;" checked>
+    <input type="button" value="recall" onclick="recall();" id="recall-btn" style="/*font-size: 30px;*/">
+    <input type="button" value="answer" onclick="answer();" id="answer-btn" style="/*font-size: 30px;*/">
  
    <div style="position: fixed; right: 2px; top: 7px;">
     <span>
@@ -38,7 +61,7 @@
     </span>
     <span>
     &nbsp;
-    <a href="#" onclick="alert('Open Memory Database\nThis software is experimental and may contain errors.\nLicense: MIT\nSource Code: https://github.com/vernetit/OpenMemoryDatabase\nContact: robertchalean@gmail.com');">?</a>
+    <a href="#" onclick="alert('Open Memory Database\nImages by time: rows recall are from 0 to 4 or 0 to 9\nThis software is experimental and may contain errors.\nLicense: MIT\nSource Code: https://github.com/vernetit/OpenMemoryDatabase\nContact: robertchalean@gmail.com');">?</a>
     
     </span>
     </div>
@@ -56,8 +79,12 @@
     -->
     <div id="screen"></div>
     <div id="preload"></div>
+
+    <div style="position: fixed; bottom: 0px; height: 50px; width: 100%" id="answer-control">
+      <input type="button" value="answer" id="answer-btn-2" onclick="answer();" style="float: right; margin-right: 10px; zoom: 2;">
+    </div>
  
-   <script src="js/app/image.js"></script>
+   <script src="js/app/imagesTime.js"></script>
    <script src="js/controller.js"></script>
    </body>
 </html>

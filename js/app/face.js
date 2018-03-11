@@ -330,7 +330,7 @@ function preload() {
 
       //console.log(`<img src="${arrayImages[i]}" id="imgPreload-${zPreload}">`);
 
-       $("#preload").append(`<img src="${arrayPreloadImages[i]}" id="imgPreload-${zPreload}"  width="32" height="32" style="opacity: 0.5;">`);
+       $("#preload").append(`<img src="${rootDir}${arrayPreloadImages[i]}" id="imgPreload-${zPreload}"  width="32" height="32" style="opacity: 0.5;">`);
 
        $(`#imgPreload-${zPreload}`).on("load",function(){
           
@@ -611,10 +611,10 @@ function play(x){
   $("#screen").html(`
     <center>
     <h3>${contador+1}</h3>
-    <br><img src="${arrayFaces[contador][1]}" class="img-face">
+    <br><img src="${rootDir}${arrayFaces[contador][1]}" class="img-face">
     <br><b>${arrayFaces[contador][0]}</b>
     <br><b>${bApellido?arrayFaces[contador][2]:""}</b>
-    <!--<br><img src="${arrayFaces[contador][2]}" style="zoom: 0.8">-->
+    <!--<br><img src="${rootDir}${arrayFaces[contador][2]}" style="zoom: 0.8">-->
 
     </center>`)
 
@@ -672,14 +672,14 @@ function recall(){
       poner+=`
         <td id="td-resp-1-${z}">
 
-          <img src="${arrayFacesUnsorted[z][1]}" class="img-face2" id="face-img-{z}" onmouseover="ponerPreview2(${z});">
+          <img src="${rootDir}${arrayFacesUnsorted[z][1]}" class="img-face2" id="face-img-{z}" onclick="if($(this).css('zoom')==1) $(this).css('zoom',2.5); else $(this).css('zoom',1);  /*ponerPreview2(${z});*/" onmouseout="/*$(this).css('zoom',1);*/">
           <br>
           <div class="correccion" id="td-resp-2-${z}"></div>
           <input type="text" value="" id="face-txt-${z}" style="width:75px; text-align: center;">
           <span style="${_p}">
           <br>
           <div class="correccion" id="td-resp-3-${z}"></div>
-          <input type="text" value="" id="face-txt1-${z}" style="width:75px; text-align: center;">
+          <center><input type="text" value="" id="face-txt1-${z}" style="width:75px; text-align: center;"></center>
           </span>
           <!--<br>
           <div style="width: 75px; height:75px; background-color: gray; text-align: -webkit-center;" onclick="select(0,${z});" id="td-resp-${z}"><center><b>${z+1}</b></center></div>-->
@@ -715,7 +715,7 @@ function recall(){
     preg+="<tr>";
     for(j=0;j<15;j++){
 
-      preg+=`<td style="width: 75px; height: 75px; background-color: gray;" onmouseover="ponerPreview(${z});" onclick="select(1,${z});" id="td-preg-${z}"><center><img src="${arrayImagesUnsorted[z]}" width="75px" height="75px"></td>`;
+      preg+=`<td style="width: 75px; height: 75px; background-color: gray;" onmouseover="ponerPreview(${z});" onclick="select(1,${z});" id="td-preg-${z}"><center><img src="${rootDir}${arrayImagesUnsorted[z]}" width="75px" height="75px"></td>`;
       //console.log(preg);
       z++;
     }
@@ -733,6 +733,10 @@ function recall(){
 
 
   $("#screen").append(poner);
+  
+  $(".img-face2").css('zoom',1);
+
+
 
   $("#recall-btn").hide();
   $("#answer-btn").show();
@@ -878,7 +882,7 @@ function ponerPreview(x){
   //if(selectANum!=-1)
   // return;
 
-  pon=`<center><img src="${arrayImagesUnsorted[x]}" width="388px" height="250px"></center>`;
+  pon=`<center><img src="${rootDir}${arrayImagesUnsorted[x]}" width="388px" height="250px"></center>`;
   //console.log(pon);
   $("#preview-div").html(pon);
 
@@ -888,7 +892,7 @@ function ponerPreview2(x){
 
   //if(selectANum!=-1)
   // return;
-  pon=`<center><img src="${arrayFacesUnsorted[x][1]}" width="388px" height="250px"></center>`;
+  pon=`<center><img src="${rootDir}${arrayFacesUnsorted[x][1]}" width="388px" height="250px"></center>`;
   //console.log(pon);
   $("#preview-div").html(pon);
 
@@ -938,7 +942,7 @@ function select(x,y){
       if(arrayImagesRespuestas[y]==-1)
         return;
 
-      $("#preview-div").html(`<center><img src="${arrayImagesRespuestas[y]}" width="388px" height="250px"></center>`);
+      $("#preview-div").html(`<center><img src="${rootDir}${arrayImagesRespuestas[y]}" width="388px" height="250px"></center>`);
 
       selectAtype=0;
       selectANum=y;
@@ -953,7 +957,7 @@ function select(x,y){
       if(arrayImagesRespuestas[y]==-1){
         //console.log("change");
 
-        $("#td-resp-"+y).html(`<img src="${arrayImagesUnsorted[selectANum]}" width="75px" height="75px">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImagesUnsorted[selectANum]}" width="75px" height="75px">`);
         $("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
         arrayImagesRespuestas[y]=arrayImagesUnsorted[selectANum];
@@ -969,12 +973,12 @@ function select(x,y){
 
         for(i=0;i<30;i++){
           if(arrayImagesRespuestas[y]==arrayImagesUnsorted[i]){
-            $("#td-preg-"+i).html(`<img src="${arrayImagesUnsorted[i]}" width="75px" height="75px">`);
+            $("#td-preg-"+i).html(`<img src="${rootDir}${arrayImagesUnsorted[i]}" width="75px" height="75px">`);
 
           }
         }
 
-        $("#td-resp-"+y).html(`<img src="${arrayImagesUnsorted[selectANum]}" width="75px" height="75px">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImagesUnsorted[selectANum]}" width="75px" height="75px">`);
         $("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
         arrayImagesRespuestas[y]=arrayImagesUnsorted[selectANum];
@@ -991,7 +995,7 @@ function select(x,y){
       if(arrayImagesRespuestas[y]==-1){
         //console.log("change");
 
-        $("#td-resp-"+y).html(`<img src="${arrayImagesRespuestas[selectANum]}" width="75px" height="75px">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImagesRespuestas[selectANum]}" width="75px" height="75px">`);
         $("#td-resp-"+selectANum).html(`<center><b>${selectANum+1}</b></center>`);
         //$("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
@@ -1011,8 +1015,8 @@ function select(x,y){
         arrayImagesRespuestas[selectANum]=arrayImagesRespuestas[y];
         arrayImagesRespuestas[y]=cacheImg;
 
-        $("#td-resp-"+y).html(`<img src="${arrayImagesRespuestas[y]}" width="75px" height="75px">`);
-        $("#td-resp-"+selectANum).html(`<img src="${arrayImagesRespuestas[selectANum]}" width="75px" height="75px">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImagesRespuestas[y]}" width="75px" height="75px">`);
+        $("#td-resp-"+selectANum).html(`<img src="${rootDir}${arrayImagesRespuestas[selectANum]}" width="75px" height="75px">`);
         //$("#td-resp-"+selectANum).html(`<center><b>${selectANum+1}</b></center>`);
         //$("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
@@ -1089,7 +1093,7 @@ function select(x,y){
         }
       }
 
-      $("#preview-div").html(`<center><img src="${arrayImagesUnsorted[y]}" width="388px" height="250px"></center>`);
+      $("#preview-div").html(`<center><img src="${rootDir}${arrayImagesUnsorted[y]}" width="388px" height="250px"></center>`);
 
       selectAtype=x;
       selectANum=y;
@@ -1124,7 +1128,7 @@ function select(x,y){
       if(bExisteImagen){
 
         $("#td-resp-"+selectANum).html(`<center><b>${selectANum+1}</b></center>`);
-        $("#td-preg-"+posicion).html(`<img src="${arrayImagesRespuestas[selectANum]}" width="75px" height="75px">`);
+        $("#td-preg-"+posicion).html(`<img src="${rootDir}${arrayImagesRespuestas[selectANum]}" width="75px" height="75px">`);
         arrayImagesRespuestas[selectANum]=-1;
 
       }

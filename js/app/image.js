@@ -147,7 +147,7 @@ function preload(arrayOfImages) {
 
       //console.log(`<img src="${arrayImages[i]}" id="imgPreload-${zPreload}">`);
 
-       $("#preload").append(`<img src="${arrayImages[i]}" id="imgPreload-${zPreload}-${zPreload2}"  width="32" height="32" style="opacity: 0.1;">`);
+       $("#preload").append(`<img src="${rootDir}${arrayImages[i]}" id="imgPreload-${zPreload}-${zPreload2}"  width="32" height="32" style="opacity: 0.1;">`);
 
        $(`#imgPreload-${zPreload}-${zPreload2}`).on("load",function(){
 
@@ -191,7 +191,7 @@ function init(x){
 
   //return recall();
   
-  $("#screen").html(`<center><h3>${contador}</h3><br><img src="${arrayImages[contador-1]}" class="myImage"></center>`);
+  $("#screen").html(`<center><h3>${contador}</h3><br><img src="${rootDir}${arrayImages[contador-1]}" class="myImage"></center>`);
  
 /*
   if( /Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent) ) {
@@ -261,7 +261,7 @@ function recall(){
   for(i=0;i<cantidadImagenes/15;i++){
     preg+="<tr>";
     for(j=0;j<15;j++){
-      preg+=`<td style="width: ${tamImage} ; height: ${tamImage} ; background-color: gray;" onmouseover="ponerPreview(${z-1});" onclick="select(1,${z-1});" id="td-preg-${z-1}"><center><img src="${arrayImages1[z-1]}" width="${tamImage} " height="${tamImage} "></td>`;
+      preg+=`<td style="width: ${tamImage} ; height: ${tamImage} ; background-color: gray;" onmouseover="ponerPreview(${z-1});" onclick="select(1,${z-1});" id="td-preg-${z-1}"><center><img src="${rootDir}${arrayImages1[z-1]}" width="${tamImage} " height="${tamImage} "></td>`;
       z++;
     }
     preg+=`</tr>`;
@@ -277,7 +277,7 @@ function recall(){
     for(i=0;i<2;i++){
       debug+="<tr>";
       for(j=0;j<15;j++){
-        debug+=`<td style="width: ${tamImage} ; height: ${tamImage} ; background-color: gray;"><center><img src="${arrayImages[z-1]}" width="${tamImage} " height="${tamImage} "></td>`;
+        debug+=`<td style="width: ${tamImage} ; height: ${tamImage} ; background-color: gray;"><center><img src="${rootDir}${arrayImages[z-1]}" width="${tamImage} " height="${tamImage} "></td>`;
         z++;
       }
       debug+=`</tr>`;
@@ -353,11 +353,11 @@ function answer(){
       if(arrayImagesRespuestas[i]==-1)
         poner=``;
       else
-        poner=`<img src="${arrayImagesRespuestas[i]}" width="${tamImage1}" height="${tamImage1}">`;
+        poner=`<img src="${rootDir}${arrayImagesRespuestas[i]}" width="${tamImage1}" height="${tamImage1}">`;
 
       $("#td-resp-"+i).html(`
         <center>
-          <img src="${arrayImages[i]}" width="${tamImage1}" height="${tamImage1}" style="margin-top: 5px;">
+          <img src="${rootDir}${arrayImages[i]}" width="${tamImage1}" height="${tamImage1}" style="margin-top: 5px;">
           <br>
           ${poner}                
           
@@ -428,7 +428,7 @@ function select(x,y){
 
       for(i=0;i<cantidadImagenes;i++){
             if(arrayImagesRespuestas[y]==arrayImages1[i]){
-              $("#td-preg-"+i).html(`<img src="${arrayImages1[i]}" width="${tamImage} " height="${tamImage} ">`);
+              $("#td-preg-"+i).html(`<img src="${rootDir}${arrayImages1[i]}" width="${tamImage} " height="${tamImage} ">`);
              
             }
         }
@@ -445,7 +445,7 @@ function select(x,y){
       if(arrayImagesRespuestas[y]==-1)
         return;
 
-      $("#preview-div").html(`<center><img src="${arrayImagesRespuestas[y]}" width="300px" height="225px"></center>`);
+      $("#preview-div").html(`<center><img src="${rootDir}${arrayImagesRespuestas[y]}" width="300px" height="225px"></center>`);
   
       selectAtype=0;
       selectANum=y;
@@ -460,7 +460,7 @@ function select(x,y){
       if(arrayImagesRespuestas[y]==-1){
         console.log("change");
         
-        $("#td-resp-"+y).html(`<img src="${arrayImages1[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImages1[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
         $("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
         arrayImagesRespuestas[y]=arrayImages1[selectANum];
@@ -476,12 +476,12 @@ function select(x,y){
 
         for(i=0;i<cantidadImagenes;i++){
           if(arrayImagesRespuestas[y]==arrayImages1[i]){
-            $("#td-preg-"+i).html(`<img src="${arrayImages1[i]}" width="${tamImage} " height="${tamImage} ">`);
+            $("#td-preg-"+i).html(`<img src="${rootDir}${arrayImages1[i]}" width="${tamImage} " height="${tamImage} ">`);
 
           }
         }
 
-        $("#td-resp-"+y).html(`<img src="${arrayImages1[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImages1[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
         $("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
         arrayImagesRespuestas[y]=arrayImages1[selectANum];
@@ -498,7 +498,7 @@ function select(x,y){
       if(arrayImagesRespuestas[y]==-1){
         console.log("change");
         
-        $("#td-resp-"+y).html(`<img src="${arrayImagesRespuestas[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImagesRespuestas[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
         $("#td-resp-"+selectANum).html(`<center><b>${selectANum+1}</b></center>`);
         //$("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
@@ -518,8 +518,8 @@ function select(x,y){
         arrayImagesRespuestas[selectANum]=arrayImagesRespuestas[y];
         arrayImagesRespuestas[y]=cacheImg;
         
-        $("#td-resp-"+y).html(`<img src="${arrayImagesRespuestas[y]}" width="${tamImage} " height="${tamImage} ">`);
-        $("#td-resp-"+selectANum).html(`<img src="${arrayImagesRespuestas[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
+        $("#td-resp-"+y).html(`<img src="${rootDir}${arrayImagesRespuestas[y]}" width="${tamImage} " height="${tamImage} ">`);
+        $("#td-resp-"+selectANum).html(`<img src="${rootDir}${arrayImagesRespuestas[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
         //$("#td-resp-"+selectANum).html(`<center><b>${selectANum+1}</b></center>`);
         //$("#td-preg-"+selectANum).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
@@ -552,7 +552,7 @@ function select(x,y){
 
 
 
-        $("#td-resp-"+selectBNum).html(`<img src="${arrayImages1[y]}" width="${tamImage} " height="${tamImage} ">`);
+        $("#td-resp-"+selectBNum).html(`<img src="${rootDir}${arrayImages1[y]}" width="${tamImage} " height="${tamImage} ">`);
         $("#td-preg-"+y).html(`&nbsp;`);
         $("#preview-div").html(`&nbsp;`);
         arrayImagesRespuestas[selectBNum]=arrayImages1[y];
@@ -600,7 +600,7 @@ function select(x,y){
         }
       }
 
-      $("#preview-div").html(`<center><img src="${arrayImages1[y]}" width="300px" height="225px"></center>`);
+      $("#preview-div").html(`<center><img src="${rootDir}${arrayImages1[y]}" width="300px" height="225px"></center>`);
 
       selectAtype=x;
       selectANum=y;
@@ -635,7 +635,7 @@ function select(x,y){
       if(bExisteImagen){
       
         $("#td-resp-"+selectANum).html(`<center><b>${selectANum+1}</b></center>`);
-        $("#td-preg-"+posicion).html(`<img src="${arrayImagesRespuestas[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
+        $("#td-preg-"+posicion).html(`<img src="${rootDir}${arrayImagesRespuestas[selectANum]}" width="${tamImage} " height="${tamImage} ">`);
         arrayImagesRespuestas[selectANum]=-1;
         
       }
@@ -726,7 +726,7 @@ function ponerPreview(x){
   if(selectANum!=-1)
     return;
 
-  pon=`<center><img src="${arrayImages1[x]}" width="300px" height="225px"></center>`;
+  pon=`<center><img src="${rootDir}${arrayImages1[x]}" width="300px" height="225px"></center>`;
   console.log(pon);
   $("#preview-div").html(pon);
 
@@ -788,7 +788,7 @@ function startGame(){
       
     }
     
-    x=_.range(0,i-1);
+    x=_.range(0,i);
     x=_.shuffle(x);
     x=_.first(x,cantidadImagenes);
    
