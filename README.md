@@ -29,6 +29,13 @@ Folders of faces and names,images and words
 /surnames/my_list.txt (add to this folder multiple files in txt format)
 /images/any folder name/ (folder with jpg or png files)
 /words/my archive.txt (add to this folder multiple files in txt format)
+/soudns/ (folder with sounds fx)
+/cards/my_folder_name/ (folder with cards)
+/figuras/ (folder with shapes)
+
+You can download all the folders with a deffault configuration and test the App here: 
+
+http://atletismomental.blogspot.com.ar/2017/03/memorydb-windows-64bits-train-with-your.html
 
 Contact: robertchalean@gmail.com
 
